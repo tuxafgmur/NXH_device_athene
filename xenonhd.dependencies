@@ -1,0 +1,12 @@
+[
+  {
+    "repository": "TeamHorizon/android_kernel_motorola_msm8952",
+    "target_path": "kernel/msm8952",
+    "branch": "n"
+  },
+  {
+    "repository": "TeamHorizon/proprietary_vendor_motorola_athene",
+    "target_path": "vendor/motorola",
+    "branch": "n"
+  }
+]
