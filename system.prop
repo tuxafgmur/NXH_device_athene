@@ -77,9 +77,6 @@ persist.hwc.ptor.enable=true
 persist.mdpcomp_perfhint=50
 persist.metadata_dynfps.disable=true
 
-# Miracast broadcast screen
-persist.debug.wfd.enable=1
-
 # Data
 ro.use_data_netmgrd=true
 persist.data.netmgrd.qos.enable=true
@@ -147,7 +144,7 @@ camera.lowpower.record.enable=1
 camera.display.lmax=1280x720
 camera.display.umax=1920x1080
 persist.camera.HAL3.enabled=1
-camera.hal1.packagelist=com.skype.raider,com.whatsapp,com.tencent.mm,com.google.android.GoogleCamera
+camera.hal1.packagelist=com.skype.raider,com.google.android.talk,com.whatsapp,com.snapchat.android,com.instagram.android
 
 # CNE
 persist.cne.feature=1
