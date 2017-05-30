@@ -24,6 +24,12 @@ TARGET_SCREEN_WIDTH := 1080
 TARGET_SCREEN_HEIGHT := 1920
 TARGET_BOOTANIMATION_HALF_RES := true
 
+ROOT_METHOD=magisk
+
+PRODUCT_PACKAGES += \
+    Adaway \
+    KernelAdiutor
+
 ## Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := athene
 PRODUCT_NAME := xenonhd_athene
