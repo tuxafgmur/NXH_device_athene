@@ -30,3 +30,5 @@ PRODUCT_NAME := xenonhd_athene
 PRODUCT_BRAND := Motorola
 PRODUCT_MANUFACTURER := Motorola
 PRODUCT_RELEASE_NAME := athene
+
+PRODUCT_PROPERTY_OVERRIDES += ro.xenonhd.maintainer="Vachounet"
