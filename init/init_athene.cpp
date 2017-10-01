@@ -38,7 +38,7 @@ static void target_ram(void);
 
 void vendor_load_properties()
 {
-    INFO("Starting custom ini");
+    INFO("Starting custom init");
 
     std::string platform;
     std::string device_boot;
@@ -52,6 +52,7 @@ void vendor_load_properties()
         return;
 
     device_boot = property_get("ro.boot.device");
+
     property_set("ro.hw.device", device_boot.c_str());
 
     sku = property_get("ro.boot.hardware.sku");
@@ -66,18 +67,18 @@ void vendor_load_properties()
     target_ram();
     num_sims();
 
-    if (device_boot == "athene_13mp") {
+   if (device_boot == "athene_13mp") {
         /* Moto G4 (XT162x) */
-        property_set("ro.product.device", "athene");
         property_set("ro.build.description", "athene-user 7.0 NPJ25.93-14 16 release-keys");
         property_set("ro.build.fingerprint", "motorola/athene/athene:7.0/NPJ25.93-14/16:user/release-keys");
+        property_set("ro.product.device", "athene");
         property_set("ro.product.model", "Moto G4");
         property_set("ro.telephony.default_network", "10");
     } else {
         /* Moto G4 Plus (XT164x) */
-        property_set("ro.product.device", "athene_f");
         property_set("ro.build.description", "athene_f-user 7.0 NPJ25.93-14 16 release-keys");
         property_set("ro.build.fingerprint", "motorola/athene_f/athene_f:7.0/NPJ25.93-14/16:user/release-keys");
+        property_set("ro.product.device", "athene_f");
         property_set("ro.product.model", "Moto G4 Plus");
         property_set("ro.telephony.default_network", "10,0");
     }
@@ -111,45 +112,27 @@ static void target_ram(void) {
 
     ram = property_get("ro.boot.ram");
 
+    property_set("dalvik.vm.heapgrowthlimit", "192m");
+    property_set("dalvik.vm.heapmaxfree", "8m");
+    property_set("dalvik.vm.heapminfree", "512k");
+    property_set("dalvik.vm.heapsize", "384m");
+    property_set("dalvik.vm.heapstartsize", "8m");
+    property_set("dalvik.vm.heaptargetutilization", "0.75");
+    property_set("ro.hwui.drop_shadow_cache_size", "6");
+    property_set("ro.hwui.gradient_cache_size", "1");
+    property_set("ro.hwui.layer_cache_size", "48");
+    property_set("ro.hwui.path_cache_size", "32");
+    property_set("ro.hwui.r_buffer_cache_size", "8");
+    property_set("ro.hwui.text_large_cache_width", "2048");
     if (ram == "2GB") {
-        property_set("dalvik.vm.heapstartsize", "8m");
-        property_set("dalvik.vm.heapgrowthlimit", "192m");
-        property_set("dalvik.vm.heapsize", "384m");
-        property_set("dalvik.vm.heaptargetutilization", "0.75");
-        property_set("dalvik.vm.heapminfree", "512k");
-        property_set("dalvik.vm.heapmaxfree", "8m");
-
-        property_set("ro.hwui.texture_cache_size", "72");
-        property_set("ro.hwui.layer_cache_size", "48");
-        property_set("ro.hwui.r_buffer_cache_size", "8");
-        property_set("ro.hwui.path_cache_size", "32");
-        property_set("ro.hwui.gradient_cache_size", "1");
-        property_set("ro.hwui.drop_shadow_cache_size", "6");
-        property_set("ro.hwui.texture_cache_flushrate", "0.4");
-        property_set("ro.hwui.text_small_cache_width", "1024");
-        property_set("ro.hwui.text_small_cache_height", "1024");
-        property_set("ro.hwui.text_large_cache_width", "2048");
         property_set("ro.hwui.text_large_cache_height", "1024");
     } else {
-        property_set("dalvik.vm.heapstartsize", "8m");
-        property_set("dalvik.vm.heapgrowthlimit", "192m");
-        property_set("dalvik.vm.heapsize", "384m");
-        property_set("dalvik.vm.heaptargetutilization", "0.75");
-        property_set("dalvik.vm.heapminfree", "512k");
-        property_set("dalvik.vm.heapmaxfree", "8m");
-
-        property_set("ro.hwui.texture_cache_size", "72");
-        property_set("ro.hwui.layer_cache_size", "48");
-        property_set("ro.hwui.r_buffer_cache_size", "8");
-        property_set("ro.hwui.path_cache_size", "32");
-        property_set("ro.hwui.gradient_cache_size", "1");
-        property_set("ro.hwui.drop_shadow_cache_size", "6");
-        property_set("ro.hwui.texture_cache_flushrate", "0.4");
-        property_set("ro.hwui.text_small_cache_width", "1024");
-        property_set("ro.hwui.text_small_cache_height", "1024");
-        property_set("ro.hwui.text_large_cache_width", "2048");
         property_set("ro.hwui.text_large_cache_height", "2048");
     }
+    property_set("ro.hwui.text_small_cache_height", "1024");
+    property_set("ro.hwui.text_small_cache_width", "1024");
+    property_set("ro.hwui.texture_cache_flushrate", "0.4");
+    property_set("ro.hwui.texture_cache_size", "72");
 }
 
 static void num_sims(void) {
