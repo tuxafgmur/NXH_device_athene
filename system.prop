@@ -29,7 +29,6 @@ persist.radio.sib16_support=1
 persist.sys.qc.sub.rdump.on=1
 persist.sys.qc.sub.rdump.max=0
 persist.radio.apn_delay=5000
-keyguard.no_require_sim=true
 persist.radio.RATE_ADAPT_ENABLE=1
 persist.radio.REVERSE_QMI=0
 persist.radio.ROTATION_ENABLE=1
@@ -183,7 +182,6 @@ mm.enable.qcom_parser=135715
 vidc.enc.dcvs.extra-buff-count=2
 vidc.enc.narrow.searchrange=1
 media.camera.ts.monotonic=1
-mm.enable.sec.smoothstreaming=false
 
 # GPS
 persist.mot.gps.conf.from.sim=true
@@ -202,8 +200,6 @@ persist.debug.coresight.config=stm-events
 dalvik.vm.boot-dex2oat-threads=4
 dalvik.vm.dex2oat-threads=2
 dalvik.vm.image-dex2oat-threads=4
-dalvik.vm.isa.arm.features=default
-dalvik.vm.isa.arm.variant=cortex-a53
 
 # Perf
 ro.vendor.gt_library=libqti-gt.so
@@ -242,7 +238,6 @@ net.tcp.2g_init_rwnd=10
 wifi.interface=wlan0
 
 # Play Store
-ro.com.google.clientidbase=android-motorola
 ro.com.google.clientidbase.ms=android-motorola
 ro.com.google.clientidbase.am=android-motorola
 ro.com.google.clientidbase.gmm=android-motorola
