@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Inherit some common CM stuff.
+# Inherit some common stuff.
 $(call inherit-product, vendor/xenonhd/config/common_full_phone.mk)
 
 $(call inherit-product, device/motorola/athene/full_athene.mk)
@@ -24,17 +24,11 @@ TARGET_SCREEN_WIDTH := 1080
 TARGET_SCREEN_HEIGHT := 1920
 TARGET_BOOTANIMATION_HALF_RES := true
 
-ROOT_METHOD=magisk
+ROOT_METHOD := su
 
-PRODUCT_PACKAGES += \
-    Adaway \
-    KernelAdiutor
-
-## Device identifier. This must come after all inclusions
+# Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := athene
 PRODUCT_NAME := xenonhd_athene
 PRODUCT_BRAND := Motorola
 PRODUCT_MANUFACTURER := Motorola
 PRODUCT_RELEASE_NAME := athene
-
-PRODUCT_PROPERTY_OVERRIDES += ro.xenonhd.maintainer="joe_pacino"

@@ -1,4 +1,3 @@
-#
 # Copyright (C) 2016 The CyanogenMod Project
 #           (C) 2017 The LineageOS Project
 #
@@ -13,29 +12,29 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
-# Also get non-open-source specific aspects if available
+# Non-open-source specific
 $(call inherit-product, vendor/motorola/athene/athene-vendor.mk)
 
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
 # Screen density
+PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
-# These are the hardware-specific features
+# Hardware-specific features
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml \
     frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
     frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
     frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
+    frameworks/native/data/etc/android.hardware.fingerprint.xml:system/etc/permissions/android.hardware.fingerprint.xml \
     frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
-    frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
-    frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
+    frameworks/native/data/etc/android.hardware.opengles.aep.xml:system/etc/permissions/android.hardware.opengles.aep.xml \
     frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
     frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:system/etc/permissions/android.hardware.sensor.gyroscope.xml \
     frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
@@ -47,29 +46,32 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
     frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
+    frameworks/native/data/etc/android.hardware.vulkan.level-0.xml:system/etc/permissions/android.hardware.vulkan.level.xml \
+    frameworks/native/data/etc/android.hardware.vulkan.version-1_0_3.xml:system/etc/permissions/android.hardware.vulkan.version.xml \
+    frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
+    frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
     frameworks/native/data/etc/android.software.midi.xml:system/etc/permissions/android.software.midi.xml \
     frameworks/native/data/etc/android.software.print.xml:system/etc/permissions/android.software.print.xml \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
-    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
-    frameworks/native/data/etc/android.hardware.fingerprint.xml:system/etc/permissions/android.hardware.fingerprint.xml \
-    frameworks/native/data/etc/android.hardware.vulkan.level-0.xml:system/etc/permissions/android.hardware.vulkan.level.xml \
-    frameworks/native/data/etc/android.hardware.vulkan.version-1_0_3.xml:system/etc/permissions/android.hardware.vulkan.version.xml \
-    frameworks/native/data/etc/android.hardware.opengles.aep.xml:system/etc/permissions/android.hardware.opengles.aep.xml
+    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml
 
-# Motorola Camera permissions
+# Camera
+PRODUCT_PACKAGES += \
+    camera.msm8952 \
+    libbson
+    
+# Motorola Camera 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/com.motorola.camera.xml:system/etc/permissions/com.motorola.camera.xml \
     $(LOCAL_PATH)/configs/com.motorola.cameraone.xml:system/etc/permissions/com.motorola.cameraone.xml
 
-# Screen density
-PRODUCT_AAPT_CONFIG := normal
-
 # Audio
 PRODUCT_PACKAGES += \
-    audiod \
     audio.a2dp.default \
+    audio.primary.msm8952 \
     audio.r_submix.default \
     audio.usb.default \
+    audiod \
     libaudio-resampler \
     libqcompostprocbundle \
     libqcomvisualizer \
@@ -80,32 +82,22 @@ PRODUCT_PACKAGES += \
     libtinyxml \
     tinymix
 
-# Audio
-PRODUCT_PACKAGES += \
-    audio.primary.msm8952
-
 PRODUCT_COPY_FILES +=  \
-    $(LOCAL_PATH)/audio/audio_effects.conf:system/vendor/etc/audio_effects.conf \
-    $(LOCAL_PATH)/audio/audio_platform_info.xml:system/etc/audio_platform_info.xml \
-    $(LOCAL_PATH)/audio/audio_policy.conf:system/etc/audio_policy.conf \
-    $(LOCAL_PATH)/audio/mixer_paths.xml:system/etc/mixer_paths.xml \
-    $(LOCAL_PATH)/audio/audio_output_policy.conf:system/vendor/etc/audio_output_policy.conf \
     $(LOCAL_PATH)/audio/ap_gain.bin:system/etc/ap_gain.bin \
     $(LOCAL_PATH)/audio/ap_gain_mmul.bin:system/etc/ap_gain_mmul.bin \
+    $(LOCAL_PATH)/audio/audio_effects.conf:system/vendor/etc/audio_effects.conf \
     $(LOCAL_PATH)/audio/audio_ext_spkr.conf:system/etc/audio_ext_spkr.conf \
-    $(LOCAL_PATH)/audio/sound_trigger_mixer_paths.xml:system/etc/sound_trigger_mixer_paths.xml \
-    $(LOCAL_PATH)/audio/sound_trigger_platform_info.xml:system/etc/sound_trigger_platform_info.xml \
+    $(LOCAL_PATH)/audio/audio_output_policy.conf:system/vendor/etc/audio_output_policy.conf \
+    $(LOCAL_PATH)/audio/audio_platform_info.xml:system/etc/audio_platform_info.xml \
     $(LOCAL_PATH)/audio/audio_platform_info_extcodec.xml:system/etc/audio_platform_info_extcodec.xml \
+    $(LOCAL_PATH)/audio/audio_policy.conf:system/etc/audio_policy.conf \
     $(LOCAL_PATH)/audio/drc/drc_cfg_5.1.txt:system/etc/drc/drc_cfg_5.1.txt \
     $(LOCAL_PATH)/audio/drc/drc_cfg_AZ.txt:system/etc/drc/drc_cfg_AZ.txt \
+    $(LOCAL_PATH)/audio/mixer_paths.xml:system/etc/mixer_paths.xml \
+    $(LOCAL_PATH)/audio/sound_trigger_mixer_paths.xml:system/etc/sound_trigger_mixer_paths.xml \
+    $(LOCAL_PATH)/audio/sound_trigger_platform_info.xml:system/etc/sound_trigger_platform_info.xml \
     $(LOCAL_PATH)/audio/surround_sound_3mic/surround_sound_rec_5.1.cfg:system/etc/surround_sound_3mic/surround_sound_rec_5.1.cfg \
     $(LOCAL_PATH)/audio/surround_sound_3mic/surround_sound_rec_AZ.cfg:system/etc/surround_sound_3mic/surround_sound_rec_AZ.cfg
-
-# Camera
-PRODUCT_PACKAGES += \
-    camera.msm8952 \
-    libbson \
-    Snap
 
 # CMActions
 PRODUCT_PACKAGES += \
@@ -124,16 +116,16 @@ PRODUCT_PACKAGES += \
     ethertypes \
     libebtc
 
-# FM
+# Fm
 PRODUCT_PACKAGES += \
     FMRadio \
     libfmjni
 
-# For android_filesystem_config.h
+# Android_filesystem_config.h
 PRODUCT_PACKAGES += \
     fs_config_files
 
-# GPS
+# Gps
 PRODUCT_PACKAGES += \
     gps.msm8952 \
     libgnsspps
@@ -146,7 +138,12 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/etc/sap.conf:system/etc/sap.conf \
     $(LOCAL_PATH)/gps/etc/xtwifi.conf:system/etc/xtwifi.conf
 
-# IRSC
+# Display panel
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/display/pp_calib_data_mipi_mot_cmd_boe_1080p_546_v0.xml:system/etc/pp_calib_data_mipi_mot_cmd_boe_1080p_546_v0.xml \
+    $(LOCAL_PATH)/display/pp_calib_data_mipi_mot_cmd_lgd_1080p_546_v0.xml:system/etc/pp_calib_data_mipi_mot_cmd_lgd_1080p_546_v0.xml
+
+# Irsc
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sec_config:system/etc/sec_config
 
@@ -158,13 +155,18 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     lights.msm8952
 
-# LiveDisplay native
+# LiveDisplay
 PRODUCT_PACKAGES += \
     libjni_livedisplay
 
-# OEM
+# Oem
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/vhw.xml:system/etc/vhw.xml
+
+# Fonts
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/fonts/Newfont_Light.ttf:system/fonts/Newfont_Light.ttf\
+    $(LOCAL_PATH)/fonts/Newfont_Regular.ttf:system/fonts/Newfont_Regular.ttf
 
 # Media
 PRODUCT_COPY_FILES += \
@@ -175,9 +177,8 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml
 
-# OMX
+# Omx
 PRODUCT_PACKAGES += \
-    libc2dcolorconvert \
     libOmxAacDec \
     libOmxAacEnc \
     libOmxAmrEnc \
@@ -188,16 +189,17 @@ PRODUCT_PACKAGES += \
     libOmxFlacEnc \
     libOmxQcelp13Dev \
     libOmxQcelp13Enc \
-    libOmxSwVencMpeg4 \
     libOmxSwVencHevc \
+    libOmxSwVencMpeg4 \
     libOmxVdec \
     libOmxVdecHevc \
-    libOmxVidcCommon \
     libOmxVenc \
-    libstagefrighthw \
-    libstagefright_soft_flacdec
+    libOmxVidcCommon \
+    libc2dcolorconvert \
+    libstagefright_soft_flacdec \
+    libstagefrighthw
 
-# IPA Manager
+# Ipa Manager
 PRODUCT_PACKAGES += \
     ipacm \
     IPACM_cfg.xml
@@ -220,7 +222,7 @@ PRODUCT_PACKAGES += \
     init.qcom.ril.sh \
     ueventd.qcom.rc
 
-# RIL
+# Ril
 PRODUCT_PACKAGES += \
     libcnefeatureconfig \
     librmnetctl \
@@ -244,24 +246,18 @@ PRODUCT_COPY_FILES += \
 
 # Wifi
 PRODUCT_PACKAGES += \
-    hostapd_default.conf \
+    WCNSS_wlan_dictionary.dat \
     hostapd \
-    wpa_supplicant \
-    wpa_supplicant.conf
-
-PRODUCT_PACKAGES += \
-    p2p_supplicant_overlay.conf \
-    wpa_supplicant_overlay.conf
-
-PRODUCT_PACKAGES += \
-    WCNSS_wlan_dictionary.dat
-
-PRODUCT_PACKAGES += \
+    hostapd_default.conf \
+    libQWiFiSoftApCfg \
     libcurl \
     libqsap_sdk \
-    libQWiFiSoftApCfg \
+    p2p_supplicant_overlay.conf \
     tcpdump \
-    wcnss_service
+    wcnss_service \
+    wpa_supplicant \
+    wpa_supplicant.conf \
+    wpa_supplicant_overlay.conf
 
 PRODUCT_COPY_FILES += \
     kernel/motorola/msm8952/drivers/staging/prima/firmware_bin/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
@@ -275,11 +271,5 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/keylayout/synaptics_dsx.kl:system/usr/keylayout/synaptics_dsx.kl \
     $(LOCAL_PATH)/keylayout/synaptics_rmi4_i2c.kl:system/usr/keylayout/synaptics_rmi4_i2c.kl
 
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/display/pp_calib_data_mipi_mot_cmd_boe_1080p_546_v0.xml:system/etc/pp_calib_data_mipi_mot_cmd_boe_1080p_546_v0.xml \
-    $(LOCAL_PATH)/display/pp_calib_data_mipi_mot_cmd_lgd_1080p_546_v0.xml:system/etc/pp_calib_data_mipi_mot_cmd_lgd_1080p_546_v0.xml \
-
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
-
 PRODUCT_GMS_CLIENTID_BASE := android-motorola
-
