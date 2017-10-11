@@ -40,7 +40,7 @@
 #if defined( _ANDROID_)
 #include "qmi_cci_target.h"
 #include "qmi_cci_common.h"
-#define LOG_NDEBUG 0
+//#define LOG_NDEBUG 0
 #define LOG_TAG "LocSvc_api_v02"
 #endif //_ANDROID_
 
