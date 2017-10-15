@@ -9,4 +9,3 @@ allow rild sensorservice_service:service_manager find;
 allow rild system_data_file:sock_file { create unlink setattr };
 allow rild system_server:unix_stream_socket { read write };
 allow rild unlabeled:dir { getattr open read };
-allow rild persist_file:dir search;

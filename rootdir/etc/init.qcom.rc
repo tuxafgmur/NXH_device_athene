@@ -304,7 +304,7 @@ on fs
 
     # This partition is used by moto for their system apps. Mounting this breaks boot for some.
     # wait /dev/block/bootdevice/by-name/oem
-    # mount ext4 /dev/block/bootdevice/by-name/oem /oem ro nosuid nodev
+    # mount ext4 /dev/block/bootdevice/by-name/oem /oem ro nosuid nodev  context=u:object_r:oemfs:s0
 
     wait /dev/block/bootdevice/by-name/dsp
     mount ext4 /dev/block/bootdevice/by-name/dsp /dsp nosuid nodev barrier=1
@@ -317,7 +317,7 @@ on fs
     # use /persist as phony PDS partition
     symlink /persist /pds
 
-    # wait /dev/block/bootdevice/by-name/hw
+    wait /dev/block/bootdevice/by-name/hw
     start oem-hw-sh
 
 on post-fs
@@ -643,14 +643,14 @@ service imsqmidaemon /system/bin/imsqmidaemon
     class main
     user system
     socket ims_qmid stream 0660 system radio
-    group radio net_raw log diag
+    group radio log diag
     writepid /dev/cpuset/system-background/tasks
 
 service imsdatadaemon /system/bin/imsdatadaemon
     class main
     user system
     socket ims_datad stream 0660 system radio
-    group system wifi radio inet net_raw log diag net_admin
+    group system wifi radio inet log diag
     writepid /dev/cpuset/system-background/tasks
     disabled
 
