@@ -58,14 +58,14 @@ public class FlipToMute implements UpdatedStateNotifier {
     @Override
     public void updateState() {
         if (mCMActionsSettings.isFlipToMuteEnabled() && !mIsEnabled) {
-            Log.d(TAG, "Enabling");
+            //Log.d(TAG, "Enabling");
             mSensorHelper.registerListener(mFlatDown, mFlatDownListener);
             mSensorHelper.registerListener(mStow, mStowListener);
             mContext.registerReceiver(mReceiver,
                 new IntentFilter(NotificationManager.ACTION_INTERRUPTION_FILTER_CHANGED));
             mIsEnabled = true;
         } else if (!mCMActionsSettings.isFlipToMuteEnabled() && mIsEnabled) {
-            Log.d(TAG, "Disabling");
+            //Log.d(TAG, "Disabling");
             mSensorHelper.unregisterListener(mFlatDownListener);
             mSensorHelper.unregisterListener(mStowListener);
             mContext.unregisterReceiver(mReceiver);
@@ -99,14 +99,14 @@ public class FlipToMute implements UpdatedStateNotifier {
 
     private void sensorChange() {
 
-        Log.d(TAG, "event: " + mIsFlatDown + " mIsStowed=" + mIsStowed);
+        //Log.d(TAG, "event: " + mIsFlatDown + " mIsStowed=" + mIsStowed);
 
         if (mIsFlatDown && mIsStowed) {
             mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_PRIORITY);
-            Log.d(TAG, "Interrupt filter: Allow priority");
+            //Log.d(TAG, "Interrupt filter: Allow priority");
         } else if (!mIsFlatDown) {
             mNotificationManager.setInterruptionFilter(mFilter);
-            Log.d(TAG, "Interrupt filter: Restore");
+            //Log.d(TAG, "Interrupt filter: Restore");
         }
     }
 
@@ -116,7 +116,7 @@ public class FlipToMute implements UpdatedStateNotifier {
         public void onReceive(Context context, Intent intent) {
             if (!mIsFlatDown && !mIsStowed) {
                 mFilter = mNotificationManager.getCurrentInterruptionFilter();
-                Log.d(TAG, "Interrupt filter: Backup");
+                //Log.d(TAG, "Interrupt filter: Backup");
             }
         }
     }

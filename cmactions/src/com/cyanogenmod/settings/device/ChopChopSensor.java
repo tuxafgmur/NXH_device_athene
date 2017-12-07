@@ -47,12 +47,12 @@ public class ChopChopSensor implements SensorEventListener, UpdatedStateNotifier
     @Override
     public synchronized void updateState() {
         if (mCMActionsSettings.isChopChopGestureEnabled() && !mIsEnabled) {
-            Log.d(TAG, "Enabling");
+            // Log.d(TAG, "Enabling");
             mSensorHelper.registerListener(mSensor, this);
             mSensorHelper.registerListener(mProx, mProxListener);
             mIsEnabled = true;
         } else if (! mCMActionsSettings.isChopChopGestureEnabled() && mIsEnabled) {
-            Log.d(TAG, "Disabling");
+            // Log.d(TAG, "Disabling");
             mSensorHelper.unregisterListener(this);
             mSensorHelper.unregisterListener(mProxListener);
             mIsEnabled = false;
@@ -61,9 +61,9 @@ public class ChopChopSensor implements SensorEventListener, UpdatedStateNotifier
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        Log.d(TAG, "chop chop triggered");
+        //Log.d(TAG, "chop chop triggered");
         if (mProxIsCovered) {
-            Log.d(TAG, "proximity sensor covered, ignoring chop-chop");
+            //Log.d(TAG, "proximity sensor covered, ignoring chop-chop");
             return;
         }
         mCMActionsSettings.chopChopAction();

@@ -45,7 +45,7 @@ public class ProximitySensor implements ScreenStateNotifier, SensorEventListener
     @Override
     public void screenTurnedOn() {
         if (mEnabled) {
-            Log.d(TAG, "Disabling");
+            //Log.d(TAG, "Disabling");
             mSensorHelper.unregisterListener(this);
             mEnabled = false;
         }
@@ -54,7 +54,7 @@ public class ProximitySensor implements ScreenStateNotifier, SensorEventListener
     @Override
     public void screenTurnedOff() {
         if (mCMActionsSettings.isIrWakeupEnabled() && !mEnabled) {
-            Log.d(TAG, "Enabling");
+            //Log.d(TAG, "Enabling");
             mSensorHelper.registerListener(mSensor, this);
             mEnabled = true;
         }
@@ -64,7 +64,7 @@ public class ProximitySensor implements ScreenStateNotifier, SensorEventListener
     public void onSensorChanged(SensorEvent event) {
         boolean isNear = event.values[0] < mSensor.getMaximumRange();
         if (mSawNear && !isNear) {
-            Log.d(TAG, "wave triggered");
+            //Log.d(TAG, "wave triggered");
             mSensorAction.action();
         }
         mSawNear = isNear;

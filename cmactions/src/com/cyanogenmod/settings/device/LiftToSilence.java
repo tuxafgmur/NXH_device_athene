@@ -62,12 +62,12 @@ public class LiftToSilence extends PhoneStateListener implements SensorEventList
     @Override
     public synchronized void onCallStateChanged(int state, String incomingNumber) {
         if (state == TelephonyManager.CALL_STATE_RINGING && !mIsRinging) {
-            Log.d(TAG, "Ringing started");
+            //Log.d(TAG, "Ringing started");
             mSensorHelper.registerListener(mFlatUpSensor, this);
             mSensorHelper.registerListener(mStowSensor, mStowListener);
             mIsRinging = true;
         } else if (state != TelephonyManager.CALL_STATE_RINGING && mIsRinging) {
-            Log.d(TAG, "Ringing stopped");
+            //Log.d(TAG, "Ringing stopped");
             mSensorHelper.unregisterListener(this);
             mSensorHelper.unregisterListener(mStowListener);
             mIsRinging = false;
@@ -79,8 +79,8 @@ public class LiftToSilence extends PhoneStateListener implements SensorEventList
     public synchronized void onSensorChanged(SensorEvent event) {
         boolean thisFlatUp = (event.values[0] != 0);
 
-        Log.d(TAG, "event: " + thisFlatUp + " mLastFlatUp=" + mLastFlatUp + " mIsStowed=" +
-            mIsStowed);
+        //Log.d(TAG, "event: " + thisFlatUp + " mLastFlatUp=" + mLastFlatUp + " mIsStowed=" +
+        //    mIsStowed);
 
         if (mLastFlatUp && !thisFlatUp && !mIsStowed) {
             mTelecomManager.silenceRinger();

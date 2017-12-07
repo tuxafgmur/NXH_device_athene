@@ -77,14 +77,14 @@ public class ProximitySilencer extends PhoneStateListener implements SensorEvent
         }
 
         if (!isNear && mIsRinging) {
-            Log.d(TAG, "event: [" + event.values.length + "]: " + event.values[0] + ", " +
-                event.values[1] + ", " + event.values[2] + " covered " + Boolean.toString(mCoveredRinging));
+            //Log.d(TAG, "event: [" + event.values.length + "]: " + event.values[0] + ", " +
+            //    event.values[1] + ", " + event.values[2] + " covered " + Boolean.toString(mCoveredRinging));
             if (mCoveredRinging) {
-                Log.d(TAG, "Silencing ringer");
+                //Log.d(TAG, "Silencing ringer");
                 mTelecomManager.silenceRinger();
-            } else {
-                Log.d(TAG, "Ignoring silence gesture: " + now + " is too close to " +
-                        mRingStartedMs + ", delay=" + SILENCE_DELAY_MS + " or covered " + Boolean.toString(mCoveredRinging));
+            //} else {
+            //    Log.d(TAG, "Ignoring silence gesture: " + now + " is too close to " +
+            //            mRingStartedMs + ", delay=" + SILENCE_DELAY_MS + " or covered " + Boolean.toString(mCoveredRinging));
             }
             mCoveredRinging = false;
         }
@@ -93,12 +93,12 @@ public class ProximitySilencer extends PhoneStateListener implements SensorEvent
     @Override
     public synchronized void onCallStateChanged(int state, String incomingNumber) {
         if (state == CALL_STATE_RINGING && !mIsRinging) {
-            Log.d(TAG, "Ringing started");
+            //Log.d(TAG, "Ringing started");
             mSensorHelper.registerListener(mSensor, this);
             mIsRinging = true;
             mRingStartedMs = System.currentTimeMillis();
         } else if (state != CALL_STATE_RINGING && mIsRinging) {
-            Log.d(TAG, "Ringing stopped");
+            //Log.d(TAG, "Ringing stopped");
             mSensorHelper.unregisterListener(this);
             mIsRinging = false;
         }

@@ -43,7 +43,7 @@ public class GlanceSensor implements ScreenStateNotifier {
     @Override
     public void screenTurnedOn() {
         if (mEnabled) {
-            Log.d(TAG, "Disabling");
+            //Log.d(TAG, "Disabling");
             mSensorHelper.cancelTriggerSensor(mSensor, mGlanceListener);
             mEnabled = false;
         }
@@ -52,7 +52,7 @@ public class GlanceSensor implements ScreenStateNotifier {
     @Override
     public void screenTurnedOff() {
         if (mCMActionsSettings.isPickUpEnabled() && !mEnabled) {
-            Log.d(TAG, "Enabling");
+            //Log.d(TAG, "Enabling");
             mSensorHelper.requestTriggerSensor(mSensor, mGlanceListener);
             mEnabled = true;
         }
@@ -61,7 +61,7 @@ public class GlanceSensor implements ScreenStateNotifier {
     private TriggerEventListener mGlanceListener = new TriggerEventListener() {
         @Override
         public void onTrigger(TriggerEvent event) {
-            Log.d(TAG, "triggered");
+            //Log.d(TAG, "triggered");
             mSensorAction.action();
             mSensorHelper.requestTriggerSensor(mSensor, mGlanceListener);
         }

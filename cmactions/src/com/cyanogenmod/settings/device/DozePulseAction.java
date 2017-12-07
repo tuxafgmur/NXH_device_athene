@@ -47,7 +47,7 @@ public class DozePulseAction implements SensorAction, ScreenStateNotifier {
 
     public void action() {
          if (mayDoze()) {
-            Log.d(TAG, "Sending doze.pulse intent");
+            //Log.d(TAG, "Sending doze.pulse intent");
             mContext.sendBroadcast(new Intent("com.android.systemui.doze.pulse"));
         }
     }
@@ -56,14 +56,14 @@ public class DozePulseAction implements SensorAction, ScreenStateNotifier {
         long now = System.currentTimeMillis();
 
         if (now - mLastScreenOff < DELAY_BEFORE_FIRST_DOZE_IN_MS) {
-            Log.d(TAG, "Denying doze due to DELAY_BEFORE_FIRST_DOZE_IN_MS");
+            //Log.d(TAG, "Denying doze due to DELAY_BEFORE_FIRST_DOZE_IN_MS");
             return false;
         } else if (now - mLastDoze < DELAY_BETWEEN_DOZES_IN_MS) {
-            Log.d(TAG, "Denying doze due to DELAY_BETWEEN_DOZES");
+            //Log.d(TAG, "Denying doze due to DELAY_BETWEEN_DOZES");
             return false;
         }
 
-        Log.d(TAG, "Allowing doze");
+        //Log.d(TAG, "Allowing doze");
         mLastDoze = now;
         return true;
     }

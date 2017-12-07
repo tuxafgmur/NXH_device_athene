@@ -46,7 +46,7 @@ public class CMActionsService extends IntentService implements ScreenStateNotifi
         super("CMActionService");
         mContext = context;
 
-        Log.d(TAG, "Starting");
+        //Log.d(TAG, "Starting");
 
         CMActionsSettings cmActionsSettings = new CMActionsSettings(context, this);
         mSensorHelper = new SensorHelper(context);
@@ -64,8 +64,8 @@ public class CMActionsService extends IntentService implements ScreenStateNotifi
         mUpdatedStateNotifiers.add(new CameraActivationSensor(cmActionsSettings, mSensorHelper));
         if (!Device.isSurnia()){
             mUpdatedStateNotifiers.add(new ChopChopSensor(cmActionsSettings, mSensorHelper));
-        } else {
-            Log.d(TAG, "No ChopChop");
+        //} else {
+        //    Log.d(TAG, "No ChopChop");
         }
 
         mUpdatedStateNotifiers.add(new ProximitySilencer(cmActionsSettings, context, mSensorHelper));
