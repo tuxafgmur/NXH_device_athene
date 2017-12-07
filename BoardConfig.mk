@@ -55,7 +55,7 @@ TARGET_KERNEL_ARCH := arm
 TARGET_KERNEL_CONFIG := athene_defconfig
 TARGET_KERNEL_SOURCE := kernel/motorola/msm8952
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-eabi-
-KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/arm/arm-eabi-4.9/bin
+KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/arm/arm-eabi-4.8/bin
 
 # Audio
 AUDIO_FEATURE_ENABLED_KPI_OPTIMIZE := true
