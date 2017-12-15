@@ -17,6 +17,9 @@ $(call inherit-product, vendor/xenonhd/config/common_full_phone.mk)
 
 $(call inherit-product, device/motorola/athene/full_athene.mk)
 
+# Maintainer for this variant
+PRODUCT_PROPERTY_OVERRIDES += ro.xenonhd.maintainer="Tuxafgmur"
+
 # Boot animation
 TARGET_SCREEN_WIDTH := 1080
 TARGET_SCREEN_HEIGHT := 1920
