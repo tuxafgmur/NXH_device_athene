@@ -1,19 +1,17 @@
 #!/system/bin/sh
 scriptname=${0##*/}
 dbg_on=1
-debug()
-{
+
+debug() {
 	[ $dbg_on ] && echo "Debug: $*"
 }
 
-notice()
-{
+notice() {
 	echo "$*"
 	echo "$scriptname: $*" > /dev/kmsg
 }
 
-error_and_leave()
-{
+error_and_leave() {
 	local err_msg
 	local err_code=$1
 	case $err_code in
@@ -27,10 +25,7 @@ error_and_leave()
 }
 
 bootmode=`getprop ro.bootmode`
-if [ $bootmode == "mot-factory" ]
-then
-	error_and_leave 2
-fi
+[ $bootmode == "mot-factory" ] && error_and_leave 2
 
 laser_offset_path=/sys/kernel/range/offset
 laser_offset_string=$(ls $laser_offset_path)

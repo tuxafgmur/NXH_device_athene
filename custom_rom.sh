@@ -8,6 +8,9 @@ WSYSTEMDIR=$1
 
 rm -f  $WSYSTEMDIR/xbin/ps
 rm -f  $WSYSTEMDIR/etc/recovery-resource.dat
+rm -f  $WSYSTEMDIR/etc/Changelog.txt
+rm -f  $WSYSTEMDIR/etc/init/debuggerd.rc
+rm -f  $WSYSTEMDIR/etc/init/init-debug.rc
 rm -fr $WSYSTEMDIR/app/webview
 
 FirstSortLine=`grep -n 'Additional Build Properties' $WSYSTEMDIR/build.prop | cut -d: -f1`

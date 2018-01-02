@@ -3,8 +3,7 @@
 PATH=/sbin:/system/sbin:/system/bin:/system/xbin
 export PATH
 
-while getopts dpfr op;
-do
+while getopts dpfr op; do
 	case $op in
 		d)  dbg_on=1;;
 		p)  populate_only=1;;
@@ -36,19 +35,16 @@ set -A prop_names
 set -A prop_overrides
 prop_names=(ro.product.device ro.product.name)
 
-debug()
-{
+debug() {
 	[ $dbg_on ] && echo "Debug: $*"
 }
 
-notice()
-{
+notice() {
 	echo "$*"
 	echo "$scriptname: $*" > /dev/kmsg
 }
 
-reload_utags()
-{
+reload_utags() {
 	local mp=$1
 	local value
 	echo "1" > $mp/reload
@@ -61,8 +57,7 @@ reload_utags()
 	done
 }
 
-procfs_wait_for_device()
-{
+procfs_wait_for_device() {
 	local __result=$1
 	local status
 	local mpi
@@ -91,25 +86,18 @@ procfs_wait_for_device()
 	eval $__result=$status
 }
 
-
-
-set_ro_hw_properties()
-{
+set_ro_hw_properties() {
 	local utag_path
 	local utag_name
 	local prop_prefix
 	local utag_value
 	local verify
 	for hwtag in $(find $hw_mp -name '.system'); do
-		debug "path $hwtag has '.system' in its name"
 		prop_prefix=$(cat $hwtag/ascii)
 		verify=${prefix%.}
-		# esure property ends with '.'
 		if [ "$prop_prefix" == "$verify" ]; then
 			prop_prefix="$prop_prefix."
-			debug "added '.' at the end of [$prop_prefix]"
-
-                fi
+        fi
 		utag_path=${hwtag%/*}
 		utag_name=${utag_path##*/}
 		utag_value=$(cat $utag_path/ascii)
@@ -118,13 +106,9 @@ set_ro_hw_properties()
 	done
 }
 
-# Main starts here
 IFS=$'\n'
-
 notice "initializing procfs"
 procfs_wait_for_device readiness
-
 set_ro_hw_properties
 
 return 0
-

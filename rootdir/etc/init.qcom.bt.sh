@@ -1,61 +1,31 @@
 #!/system/bin/sh
 # Copyright (c) 2009-2013, The Linux Foundation. All rights reserved.
-#
-# Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions are met:
-#     * Redistributions of source code must retain the above copyright
-#       notice, this list of conditions and the following disclaimer.
-#     * Redistributions in binary form must reproduce the above copyright
-#       notice, this list of conditions and the following disclaimer in the
-#       documentation and/or other materials provided with the distribution.
-#     * Neither the name of The Linux Foundation nor
-#       the names of its contributors may be used to endorse or promote
-#       products derived from this software without specific prior written
-#       permission.
-#
-# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-# IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-# NON-INFRINGEMENT ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
-# CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-# EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
-# OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
-# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
-# OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-# ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#
 
 LOG_TAG="qcom-bluetooth"
 LOG_NAME="${0}:"
 
-loge ()
-{
+loge () {
   /system/bin/log -t $LOG_TAG -p e "$LOG_NAME $@"
 }
 
-logi ()
-{
+logi () {
   /system/bin/log -t $LOG_TAG -p i "$LOG_NAME $@"
 }
 
-failed ()
-{
+failed () {
   loge "$1: exit code $2"
   exit $2
 }
 
-program_bdaddr ()
-{
+program_bdaddr () {
   /system/bin/btnvtool -O
-  logi "Bluetooth Address programmed successfully"
+  #logi "Bluetooth Address programmed successfully"
 }
 
-#
+
 # enable bluetooth profiles dynamically
-#
-config_bt ()
-{
+
+config_bt () {
   baseband=`getprop ro.baseband`
   target=`getprop ro.board.platform`
   if [ -f /sys/devices/soc0/soc_id ]; then
@@ -72,7 +42,6 @@ config_bt ()
         setprop ro.qualcomm.bluetooth.nap false
         setprop ro.bluetooth.sap false
         setprop ro.bluetooth.dun false
-        # For MPQ as baseband is same for both
         case $soc_hwid in
           "130")
               setprop ro.qualcomm.bluetooth.hsp true
@@ -138,28 +107,23 @@ config_bt ()
         ;;
   esac
 
-  #Enable Bluetooth Profiles specific to target Dynamically
   case $target in
     "msm8960")
-       if [ "$btsoc" != "ath3k" ] && [ "$soc_hwid" != "130" ]
-       then
+       if [ "$btsoc" != "ath3k" ] && [ "$soc_hwid" != "130" ]; then
            setprop ro.bluetooth.hfp.ver 1.6
            setprop ro.qualcomm.bt.hci_transport smd
        fi
        ;;
     "msm8974" | "msm8226" | "msm8610" | "msm8916" | "msm8909" | "msm8952" )
-       if [ "$btsoc" != "ath3k" ]
-       then
+       if [ "$btsoc" != "ath3k" ];  then
            setprop ro.bluetooth.hfp.ver 1.7
            setprop ro.qualcomm.bt.hci_transport smd
        fi
        ;;
     "apq8084" | "mpq8092" | "msm8994" )
-       if [ "$btsoc" != "rome" ]
-       then
+       if [ "$btsoc" != "rome" ]; then
            setprop ro.qualcomm.bt.hci_transport smd
-       elif [ "$btsoc" = "rome" ]
-       then
+       elif [ "$btsoc" = "rome" ]; then
            setprop ro.bluetooth.hfp.ver 1.6
        fi
        ;;
@@ -168,12 +132,12 @@ config_bt ()
   esac
 
 if [ -f /system/etc/bluetooth/stack.conf ]; then
-stack=`cat /system/etc/bluetooth/stack.conf`
+    stack=`cat /system/etc/bluetooth/stack.conf`
 fi
 
 case "$stack" in
     "bluez")
-	   logi "Bluetooth stack is $stack"
+	   #logi "Bluetooth stack is $stack"
 	   setprop ro.qc.bluetooth.stack $stack
 	   reason=`getprop vold.decrypt`
 	   case "$reason" in
@@ -183,7 +147,7 @@ case "$stack" in
 	   esac
         ;;
     *)
-	   logi "Bluetooth stack is Bluedroid"
+	   # logi "Bluetooth stack is Bluedroid"
         ;;
 esac
 

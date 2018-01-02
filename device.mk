@@ -214,13 +214,19 @@ PRODUCT_PACKAGES += \
     init.mmi.boot.sh \
     init.mmi.laser.sh \
     init.mmi.touch.sh \
-    init.mmi.usb.rc \
     init.oem.hw.sh \
     init.qcom.bt.sh \
     init.qcom.power.rc \
     init.qcom.rc \
     init.qcom.ril.sh \
-    ueventd.qcom.rc
+    init.qcom.usb.rc \
+    init.rc \
+    init.rom.rc \
+    init.rom.tweaks.sh \
+    init.usb.rc \
+    tweaks.conf \
+    ueventd.qcom.rc \
+    ueventd.rc
 
 # Ril
 PRODUCT_PACKAGES += \
