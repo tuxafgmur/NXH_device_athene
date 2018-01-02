@@ -52,7 +52,7 @@ BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100
 BOARD_DTBTOOL_ARGS := --force-v3 --motorola 1
 TARGET_CUSTOM_DTBTOOL := dtbTool_custom
 TARGET_KERNEL_ARCH := arm
-TARGET_KERNEL_CONFIG := athene_defconfig
+TARGET_KERNEL_CONFIG := dhollmen_L_defconfig
 TARGET_KERNEL_SOURCE := kernel/motorola/msm8952
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-eabi-
 ifeq ($(strip $(KERNEL_TOOLCHAIN_VERSION)),)
