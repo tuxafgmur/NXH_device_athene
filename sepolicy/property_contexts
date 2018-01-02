@@ -1,4 +1,11 @@
-# Motorola service properties
 manufacturedate             u:object_r:manufacturedate_prop:s0
 qualcomm.bt.                u:object_r:bluetooth_prop:s0
 rmtfs.                      u:object_r:rmtfs_prop:s0
+ro.boot.ahead_blk0          u:object_r:system_prop:s0
+ro.boot.ahead_blk1          u:object_r:system_prop:s0
+ro.boot.maxfreq             u:object_r:system_prop:s0
+ro.boot.mincpus             u:object_r:system_prop:s0
+ro.boot.oemmnt              u:object_r:system_prop:s0
+ro.boot.sched_blk0          u:object_r:system_prop:s0
+ro.boot.sched_blk1          u:object_r:system_prop:s0
+ro.boot.zram                u:object_r:system_prop:s0

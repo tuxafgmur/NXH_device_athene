@@ -1,3 +1,2 @@
-# Motorola service properties
 type manufacturedate_prop, property_type;
 type rmtfs_prop, property_type;

@@ -1,4 +1,3 @@
-# Unsure what init is doing here
 allow init app_data_file:dir setattr;
 allow init block_device:blk_file write;
 allow init cid_block_device:blk_file setattr;
