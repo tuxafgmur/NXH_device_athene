@@ -35,7 +35,7 @@ case $BLK0_SCHED in
     ;;
 esac
 
-case $BLK0_SCHED in
+case $BLK1_SCHED in
     cfq|deadline|fiops|noop|row|zen)
         setprop ro.boot.sched_blk1 $BLK1_SCHED
     ;;
